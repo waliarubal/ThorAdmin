@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThorAdmin.Api", "ThorAdmin.Api\ThorAdmin.Api.csproj", "{042C40B5-EE6E-4AB9-9294-9FC5EF37D374}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThorAdmin.Services", "ThorAdmin.Services\ThorAdmin.Services.csproj", "{2EB11EF3-BC7B-4A09-9E7E-3ADAF98C0DA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{042C40B5-EE6E-4AB9-9294-9FC5EF37D374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042C40B5-EE6E-4AB9-9294-9FC5EF37D374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042C40B5-EE6E-4AB9-9294-9FC5EF37D374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042C40B5-EE6E-4AB9-9294-9FC5EF37D374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EB11EF3-BC7B-4A09-9E7E-3ADAF98C0DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EB11EF3-BC7B-4A09-9E7E-3ADAF98C0DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EB11EF3-BC7B-4A09-9E7E-3ADAF98C0DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EB11EF3-BC7B-4A09-9E7E-3ADAF98C0DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5363FD67-E488-4048-9E7C-A25056A2B198}
+	EndGlobalSection
+EndGlobal
