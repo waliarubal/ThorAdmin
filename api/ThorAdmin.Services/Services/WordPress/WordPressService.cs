@@ -119,7 +119,7 @@ namespace ThorAdmin.Services
                     Modified = directoryInfo.LastWriteTimeUtc
                 };
 
-                var (DbServer, DbUser, DbPassword, DbName) = await GetConfig(wpConfig.DirectoryName);
+                var (DbServer, DbUser, DbPassword, DbName) = await GetConfig(directoryInfo.FullName);
 
                 instance.Name = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogname'", DbServer, DbUser, DbPassword, DbName) ?? directoryInfo.Name;
                 instance.Description = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogdescription'", DbServer, DbUser, DbPassword, DbName);
