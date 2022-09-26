@@ -4,11 +4,11 @@ namespace ThorAdmin.Services
 {
     public interface IWordPressService
     {
-        Task<WordPressInstance> GetInstance(string instanceName, string rootDirectory);
+        Task<WordPressInstance> GetInstance(string id, string rootDirectory);
 
-        bool CreateInstance(string instanceName, string rootDirectory);
+        Task<bool> CreateInstance(string instanceName, string rootDirectory, string dbServer, string dbUser, string dbPassword, string wpArchive);
 
-        bool DeleteInstance(string instanceName, string rootDirectory);
+        Task<bool> DeleteInstance(string id, string rootDirectory);
 
         Task<IEnumerable<WordPressInstance>> GetInstances(string rootDirectory);
     }

@@ -8,6 +8,8 @@
 
         public string DbUser { get; set; } = "root";
 
-        public string DbPassword { get; set; } = "password";
+        public string DbPassword { get; set; } = string.Empty;
+
+        public string WordPressArchive { get; set; }
     }
 }

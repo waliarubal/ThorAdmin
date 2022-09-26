@@ -1,4 +1,5 @@
-﻿using ThorAdmin.Services.Models;
+﻿using System.IO.Compression;
+using ThorAdmin.Services.Models;
 
 namespace ThorAdmin.Services
 {
@@ -8,14 +9,15 @@ namespace ThorAdmin.Services
 
         public WordPressService(IMySqlService mySqlService) => _mySqlService = mySqlService;
 
-        (string DbServer, string DbUser, string DbPassword, string DbName) GetConfig(string configFile)
+        async Task<(string DbServer, string DbUser, string DbPassword, string DbName)> GetConfig(string wpDirectory)
         {
             string dbName = null,
                 dbUser = null,
                 dbPassword = null,
                 dbServer = null;
 
-            var defines = File.ReadAllLines(configFile).Where(line => line.StartsWith("define("));
+            var wpConfig = Path.Combine(wpDirectory, "wp-config.php");
+            var defines = (await File.ReadAllLinesAsync(wpConfig)).Where(line => line.StartsWith("define("));
             foreach (var define in defines)
             {
                 var config = define.Replace("define(", string.Empty).Replace(");", string.Empty).Split(",");
@@ -47,37 +49,77 @@ namespace ThorAdmin.Services
             return (dbServer, dbUser, dbPassword, dbName);
         }
 
-        public bool CreateInstance(string instanceName, string rootDirectory)
+        public async Task<bool> CreateInstance(string instanceName, string rootDirectory, string dbServer, string dbUser, string dbPassword, string wpArchive)
         {
-            var instance = GetInstance(instanceName, rootDirectory);
+            var id = instanceName
+                .Trim()
+                .ToLowerInvariant()
+                .Replace(" ", "_");
+
+            var instance = await GetInstance(id, rootDirectory);
             if (instance != null)
-                return false;
+                throw new Exception($"Instance with ID '{id}' already exists.");
+
+            var isCreated = await _mySqlService.CreateDatabase(id, dbServer, dbUser, dbPassword);
+            if (!isCreated)
+                throw new Exception($"Failed to create database '{id}'.");
+
+            if (!File.Exists(wpArchive))
+                throw new Exception($"WordPress archive does not exist.");
+
+            var wpDirectory = Path.Combine(rootDirectory, id);
+            var wpConfig = Path.Combine(wpDirectory, "wp-config.php");
+
+            ZipFile.ExtractToDirectory(wpArchive, rootDirectory);
+            Directory.Move(Path.Combine(rootDirectory, "wordpress"), wpDirectory);
+            File.Move(Path.Combine(wpDirectory, "wp-config-sample.php"), wpConfig);
+
+            if (!File.Exists(wpConfig))
+                throw new Exception("Failed to create WordPress configuration file.");
+
+            var wpConfigData = (await File.ReadAllTextAsync(wpConfig))
+                .Replace("define( 'DB_NAME', 'database_name_here' );", $"define( 'DB_NAME', '{id}' );")
+                .Replace("define( 'DB_USER', 'username_here' );", $"define('DB_USER', '{dbUser}' );")
+                .Replace("define( 'DB_PASSWORD', 'password_here' );", $"define( 'DB_PASSWORD', '{dbPassword}' );")
+                .Replace("define( 'DB_HOST', 'localhost' );", $"define( 'DB_HOST', '{dbServer}' );");
+            await File.WriteAllTextAsync(wpConfig, wpConfigData);
 
             return true;
         }
 
-        public bool DeleteInstance(string instanceName, string rootDirectory)
+        public async Task<bool> DeleteInstance(string id, string rootDirectory)
         {
-            throw new NotImplementedException();
+            var instance = await GetInstance(id, rootDirectory);
+            if (instance == null)
+                return false;
+
+            var (DbServer, DbUser, DbPassword, DbName) = await GetConfig(instance.Directory);
+
+            var isDeleted = await _mySqlService.DeleteDatabase(DbName, DbServer, DbUser, DbPassword);
+            if (!isDeleted)
+                throw new Exception($"Failed to delete database '{DbName}'.");
+
+            Directory.Delete(instance.Directory, true);
+
+            return true;
         }
 
-        
-
-        public async Task<WordPressInstance> GetInstance(string instanceName, string rootDirectory)
+        public async Task<WordPressInstance> GetInstance(string id, string rootDirectory)
         {
-            var wpDirectory = Path.Combine(rootDirectory, instanceName);
+            var wpDirectory = Path.Combine(rootDirectory, id);
             var wpConfig = new FileInfo(Path.Combine(wpDirectory, "wp-config.php"));
             if (wpConfig.Exists)
             {
                 var directoryInfo = new DirectoryInfo(wpDirectory);
                 var instance = new WordPressInstance
                 {
+                    Id = directoryInfo.Name,
                     Directory = directoryInfo.FullName,
                     Created = directoryInfo.CreationTimeUtc,
                     Modified = directoryInfo.LastWriteTimeUtc
                 };
 
-                var (DbServer, DbUser, DbPassword, DbName) = GetConfig(wpConfig.FullName);
+                var (DbServer, DbUser, DbPassword, DbName) = await GetConfig(wpConfig.DirectoryName);
 
                 instance.Name = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogname'", DbServer, DbUser, DbPassword, DbName) ?? directoryInfo.Name;
                 instance.Description = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogdescription'", DbServer, DbUser, DbPassword, DbName);
@@ -97,7 +139,6 @@ namespace ThorAdmin.Services
                 var instance = await GetInstance(directory, rootDirectory);
                 if (instance != null)
                     instances.Add(instance);
-
             }
 
             return instances;

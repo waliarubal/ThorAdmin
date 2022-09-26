@@ -16,12 +16,12 @@ public class WordPressController : ApiControllerBase<WordPressController>
     }
 
     [HttpGet]
-    [Route("[action]/{instanceName}")]
-    public async Task<IActionResult> GetInstance(string instanceName)
+    [Route("[action]/{id}")]
+    public async Task<IActionResult> GetInstance(string id)
     {
         try
         {
-            var result = await _wordPressService.GetInstance(instanceName, Settings.RootDirectory);
+            var result = await _wordPressService.GetInstance(id, Settings.RootDirectory);
             return SendOk(result);
         }
         catch (Exception ex)
@@ -33,12 +33,12 @@ public class WordPressController : ApiControllerBase<WordPressController>
     }
 
     [HttpPost]
-    [Route("[action]")]
-    public IActionResult CreateInstance([FromBody] WordPressInstance instance)
+    [Route("[action]/{instanceName}")]
+    public async Task<IActionResult> CreateInstance(string instanceName)
     {
         try
         {
-            var result = _wordPressService.CreateInstance(instance.Name, Settings.RootDirectory);
+            var result = await _wordPressService.CreateInstance(instanceName, Settings.RootDirectory, Settings.DbServer, Settings.DbUser, Settings.DbPassword, Settings.WordPressArchive);
             return SendOk(result);
         }
         catch (Exception ex)
@@ -49,12 +49,12 @@ public class WordPressController : ApiControllerBase<WordPressController>
     }
 
     [HttpDelete]
-    [Route("[action]")]
-    public IActionResult DeleteInstance([FromBody] WordPressInstance instance)
+    [Route("[action]/{id}")]
+    public async Task<IActionResult> DeleteInstance(string id)
     {
         try
         {
-            var result = _wordPressService.DeleteInstance(instance.Name, Settings.RootDirectory);
+            var result = await _wordPressService.DeleteInstance(id, Settings.RootDirectory);
             return SendOk(result);
         }
         catch (Exception ex)
