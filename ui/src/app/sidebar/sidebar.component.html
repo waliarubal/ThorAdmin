@@ -1,8 +1,23 @@
 <mat-nav-list>
-  <a mat-list-item href="..."> Monitor </a>
-  <a mat-list-item href="...">Blogs</a>
-  <a mat-list-item href="...">Databases</a>
-  <a mat-list-item href="...">Files</a>
+  <a mat-list-item routerLink="/monitor" routerLinkActive="active">
+    <mat-icon mat-list-icon fontSet="fa" fontIcon="fa-gauge-high"></mat-icon>
+    <span>Monitor</span>
+  </a>
+  <a mat-list-item routerLink="/blogs" routerLinkActive="active">
+    <mat-icon mat-list-icon fontSet="fab" fontIcon="fa-wordpress"></mat-icon>
+    <span>Blogs</span>
+  </a>
+  <a mat-list-item routerLink="/databases" routerLinkActive="active">
+    <mat-icon mat-list-icon fontSet="fa" fontIcon="fa-database"></mat-icon>
+    <span>Databases</span>
+  </a>
+  <a mat-list-item routerLink="/files" routerLinkActive="active">
+    <mat-icon mat-list-icon fontSet="fa" fontIcon="fa-folder-tree"></mat-icon>
+    <span>Files</span>
+  </a>
   <mat-divider></mat-divider>
-  <a mat-list-item href="...">Users</a>
+  <a mat-list-item routerLink="/users" routerLinkActive="active">
+    <mat-icon mat-list-icon fontSet="fa" fontIcon="fa-users"></mat-icon>
+    <span>Users</span>
+  </a>
 </mat-nav-list>

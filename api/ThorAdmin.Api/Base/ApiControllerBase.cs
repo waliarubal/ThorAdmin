@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using ThorAdmin.Services.Models;
 
 namespace ThorAdmin.Api.Base;
 
 [ApiController]
+[EnableCors("CorsPolicy")]
 [Route("api/v1/[controller]")]
 [Produces("application/json")]
 public abstract class ApiControllerBase<TController>: ControllerBase where TController : ControllerBase

@@ -89,7 +89,7 @@ namespace ThorAdmin.Services
 
         public async Task<bool> DeleteInstance(string id, string rootDirectory)
         {
-            var instance = await GetInstance(id, rootDirectory);
+            var instance = await GetInstance(id, rootDirectory, false);
             if (instance == null)
                 return false;
 
@@ -104,7 +104,7 @@ namespace ThorAdmin.Services
             return true;
         }
 
-        public async Task<WordPressInstance> GetInstance(string id, string rootDirectory)
+        public async Task<WordPressInstance> GetInstance(string id, string rootDirectory, bool isDetailRequired = true)
         {
             var wpDirectory = Path.Combine(rootDirectory, id);
             var wpConfig = new FileInfo(Path.Combine(wpDirectory, "wp-config.php"));
@@ -119,11 +119,14 @@ namespace ThorAdmin.Services
                     Modified = directoryInfo.LastWriteTimeUtc
                 };
 
-                var (DbServer, DbUser, DbPassword, DbName) = await GetConfig(directoryInfo.FullName);
+                if (isDetailRequired)
+                {
+                    var (DbServer, DbUser, DbPassword, DbName) = await GetConfig(directoryInfo.FullName);
 
-                instance.Name = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogname'", DbServer, DbUser, DbPassword, DbName) ?? directoryInfo.Name;
-                instance.Description = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogdescription'", DbServer, DbUser, DbPassword, DbName);
-                instance.Url = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'siteurl'", DbServer, DbUser, DbPassword, DbName);
+                    instance.Name = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogname'", DbServer, DbUser, DbPassword, DbName) ?? directoryInfo.Name;
+                    instance.Description = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogdescription'", DbServer, DbUser, DbPassword, DbName);
+                    instance.Url = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'siteurl'", DbServer, DbUser, DbPassword, DbName);
+                }
 
                 return instance;
             }

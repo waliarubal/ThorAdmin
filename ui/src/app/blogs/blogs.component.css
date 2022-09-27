@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button {
+  margin-left: 8px;
+}
+
+.mat-icon-cell {
+  transform: scale(1.25);
+}
+
+.mat-column-Actions {
+  text-align: right;
+}
