@@ -1,6 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { WordPressService } from '../services/word-press.service';
 import { IWordPressInstance } from '../models/word-press-instance';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateBlogComponent } from './create-blog/create-blog.component';
 
 @Component({
   selector: 'app-blogs',
@@ -12,7 +14,10 @@ export class BlogsComponent implements AfterViewInit {
   private _instances: IWordPressInstance[];
   private readonly _columns: string[];
 
-  constructor(private _wpService: WordPressService) {
+  constructor(
+    private _wpService: WordPressService,
+    private _dialogService: MatDialog
+  ) {
     this._instances = [];
     this._columns = ['Name', 'Description', 'Created', 'Modified', 'Actions'];
   }
@@ -29,10 +34,15 @@ export class BlogsComponent implements AfterViewInit {
     this.GetInstances();
   }
 
-  private GetInstances() {
+  GetInstances() {
     let subscription = this._wpService.GetInstances().subscribe((result) => {
       this._instances = result.Data;
       subscription.unsubscribe();
     });
+  }
+
+  CreateInstance() {
+    let dialogRef = this._dialogService.open(CreateBlogComponent);
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

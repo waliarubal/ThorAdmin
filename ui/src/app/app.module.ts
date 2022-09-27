@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

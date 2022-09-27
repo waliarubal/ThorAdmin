@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Create New Blog</h1>
+<div mat-dialog-content>
+  <p>Enter name of the new WordPress blog you want to be created.</p>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Instance Name</mat-label>
+    <input matInput [(ngModel)]="InstanceName" cdkFocusInitial />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="CreateInstance()" [disabled]="InstanceName == ''">
+    Create
+  </button>
+</div>
