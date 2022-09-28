@@ -1,6 +1,11 @@
-import { environment } from "../environments/environment";
+import { environment } from '../../environments/environment';
 
 const API_BASE = environment.apiBase;
+
+export enum Bool {
+    Yes = 'yes',
+    No = 'no'
+}
 
 export const API_GET_INSTANCES = `${API_BASE}/WordPress/GetInstances`;
 export const API_GET_INSTANCE = `${API_BASE}/WordPress/GetInstance`;

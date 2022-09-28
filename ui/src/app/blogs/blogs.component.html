@@ -2,10 +2,10 @@
   <mat-icon fontSet="fab" fontIcon="fa-wordpress"></mat-icon>
   <span style="margin-left: 0.25em">WordPresss Blogs</span>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="CreateInstance()">
+  <button mat-icon-button (click)="CreateInstance()" [disabled]="IsBusy">
     <mat-icon fontSet="fa" fontIcon="fa-plus"></mat-icon>
   </button>
-  <button mat-icon-button (click)="GetInstances()">
+  <button mat-icon-button (click)="GetInstances()" [disabled]="IsBusy">
     <mat-icon fontSet="fa" fontIcon="fa-arrow-rotate-right"></mat-icon>
   </button>
 </mat-toolbar>
@@ -36,7 +36,12 @@
   <ng-container matColumnDef="Actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let instance">
-      <button mat-icon-button color="warn">
+      <button
+        mat-icon-button
+        color="warn"
+        [disabled]="IsBusy"
+        (click)="DeleteInstance(instance)"
+      >
         <mat-icon fontSet="fa" fontIcon="fa-trash-can"></mat-icon>
       </button>
     </td>

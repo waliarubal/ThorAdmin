@@ -8,6 +8,8 @@ public interface IMySqlService
 
     Task<bool> DatabaseExists(string databaseName, string server, string userName, string password);
 
+    Task<bool> TableExists(string tableName, string databaseName, string server, string userName, string password);
+
     Task<bool> CreateDatabase(string databaseName, string server, string userName, string password);
 
     Task<bool> DeleteDatabase(string databaseName, string server, string userName, string password);

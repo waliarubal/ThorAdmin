@@ -21,7 +21,7 @@ public class WordPressController : ApiControllerBase<WordPressController>
     {
         try
         {
-            var result = await _wordPressService.GetInstance(id, Settings.RootDirectory);
+            var result = await _wordPressService.GetInstance(id, Settings);
             return SendOk(result);
         }
         catch (Exception ex)
@@ -38,7 +38,7 @@ public class WordPressController : ApiControllerBase<WordPressController>
     {
         try
         {
-            var result = await _wordPressService.CreateInstance(instanceName, Settings.RootDirectory, Settings.DbServer, Settings.DbUser, Settings.DbPassword, Settings.WordPressArchive);
+            var result = await _wordPressService.CreateInstance(instanceName, Settings);
             return SendOk(result);
         }
         catch (Exception ex)
@@ -54,7 +54,7 @@ public class WordPressController : ApiControllerBase<WordPressController>
     {
         try
         {
-            var result = await _wordPressService.DeleteInstance(id, Settings.RootDirectory);
+            var result = await _wordPressService.DeleteInstance(id, Settings);
             return SendOk(result);
         }
         catch (Exception ex)
@@ -70,7 +70,7 @@ public class WordPressController : ApiControllerBase<WordPressController>
     {
         try
         {
-            var result = await _wordPressService.GetInstances(Settings.RootDirectory);
+            var result = await _wordPressService.GetInstances(Settings);
             return SendOk(result);
         }
         catch (Exception ex)

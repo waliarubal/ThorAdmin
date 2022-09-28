@@ -4,6 +4,6 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="IsBusy"></mat-progress-bar>
   </mat-sidenav-content>
 </mat-sidenav-container>

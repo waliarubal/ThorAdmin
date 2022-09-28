@@ -46,8 +46,23 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = "api-docs";
     });
 }
+else
+{
+    // serve Angular from 'wwwroot' and handle browser refresh
+    app.Use(async (context, next) =>
+    {
+        await next();
+        if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+        {
+            context.Request.Path = "/index.html";
+            await next();
+        }
+    });
+    app.UseFileServer();
 
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
+}
+
 app.UseCors();
 app.UseAuthorization();
 app.MapControllers();

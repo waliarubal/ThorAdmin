@@ -2,6 +2,8 @@
 {
     public sealed class Settings
     {
+        public string BaseUrl { get; set; } = "http://localhost";
+
         public string RootDirectory { get; set; } = "/";
 
         public string  DbServer { get; set; } = "localhost";

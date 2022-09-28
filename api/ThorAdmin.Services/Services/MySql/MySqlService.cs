@@ -40,13 +40,18 @@ public class MySqlService: IMySqlService
 
     public async Task<bool> DatabaseExists(string databaseName, string server, string userName, string password)
     {
-        var sql = $"SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{databaseName}';";
+        var sql = $"SELECT COUNT(SCHEMA_NAME) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{databaseName}';";
 
-        var dbName = await ExecuteSaclar<string>(sql, server, userName, password);
-        if (dbName == null)
-            return false;
+        var count = await ExecuteSaclar<long>(sql, server, userName, password);
+        return count == 1;
+    }
 
-        return dbName.Equals(databaseName);
+    public async Task<bool> TableExists(string tableName, string databaseName, string server, string userName, string password)
+    {
+        var sql = $"SELECT COUNT(TABLE_NAME) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{tableName}' AND TABLE_SCHEMA = '{databaseName}';";
+
+        var count = await ExecuteSaclar<long>(sql, server, userName, password);
+        return count == 1;
     }
 
     public async Task<bool> CreateDatabase(string databaseName, string server, string userName, string password)
@@ -62,7 +67,7 @@ public class MySqlService: IMySqlService
         var sql = $"DROP DATABASE IF EXISTS {databaseName};";
 
         var count = await ExecuteNonQuery(sql, server, userName, password);
-        return count > 0;
+        return count <= 1;
     }
 
 }
