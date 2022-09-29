@@ -6,8 +6,8 @@ import {
   API_GET_INSTANCE,
   API_GET_INSTANCES,
 } from '../constants';
-import { IWordPressInstance } from '../models/word-press-instance';
-import { ServiceBase } from './service-base';
+import { IWordPressInstance } from '../models/word-press-instance.model';
+import { ServiceBase } from './base.service';
 
 @Injectable()
 export class WordPressService extends ServiceBase {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse } from '../models/api-response';
+import { IApiResponse } from '../models/api-response.model';
 
 @Injectable()
 export abstract class ServiceBase {

@@ -1,7 +1,79 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ComponentBase } from '../shared/base.component';
+import { IFileSystemEntry } from '../shared/models/file-system-entry.model';
+import { FileSystemService } from '../shared/services/file-system.service';
 
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
+  styleUrls: ['./files.component.css'],
+  providers: [FileSystemService],
 })
-export class FilesComponent {}
+export class FilesComponent extends ComponentBase {
+  private _entries: IFileSystemEntry[];
+  private _entry: IFileSystemEntry | null;
+  private readonly _columns: string[];
+
+  constructor(
+    private _fsService: FileSystemService,
+    private _dialogService: MatDialog
+  ) {
+    super();
+    this._entry = null;
+    this._entries = [];
+    this._columns = ['Name', 'Created', 'Modified', 'Type', 'Size', 'Actions'];
+    this.IsBusy = true;
+  }
+
+  get Entry() {
+    return this._entry;
+  }
+
+  get Entries(): IFileSystemEntry[] {
+    return this._entries;
+  }
+
+  get DirectoryCount(): number {
+    return this._entries.filter((r) => r.IsDirectory).length;
+  }
+
+  get FileCount(): number {
+    return this._entries.length - this.DirectoryCount;
+  }
+
+  get Columns(): string[] {
+    return this._columns;
+  }
+
+  ngAfterViewInit(): void {
+    this.GetEntries(this.Entry);
+  }
+
+  GetParentEntry() {
+    if (!this.Entry || !this.Entry.IsDirectory || !this.Entry.Path) return;
+
+    this.IsBusy = true;
+    let subscription = this._fsService
+      .GetParentEntry(this.Entry.Path)
+      .subscribe((result) => {
+        let entry = result.Data;
+        subscription.unsubscribe();
+        this.GetEntries(entry);
+      });
+  }
+
+  GetEntries(entry: IFileSystemEntry | null) {
+    if (entry && !entry.IsDirectory) return;
+
+    this._entry = entry;
+    let path = entry == null ? '' : entry.Path;
+
+    this.IsBusy = true;
+    let subscription = this._fsService.GetEnteries(path).subscribe((result) => {
+      this._entries = result.Data;
+      subscription.unsubscribe();
+      this.IsBusy = false;
+    });
+  }
+}

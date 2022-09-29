@@ -10,3 +10,8 @@ mat-progress-bar {
   position: absolute;
   bottom: 0;
 }
+
+
+mat-sidenav {
+  min-width: 12em;
+}

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { WordPressService } from '../shared/services/word-press.service';
-import { IWordPressInstance } from '../shared/models/word-press-instance';
+import { IWordPressInstance } from '../shared/models/word-press-instance.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { ComponentBase } from '../shared/base.component';

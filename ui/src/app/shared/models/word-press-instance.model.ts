@@ -6,4 +6,5 @@ export interface IWordPressInstance {
     Directory: string;
     Created: Date;
     Modified: Date;
+    IsConfigured: boolean;
 }

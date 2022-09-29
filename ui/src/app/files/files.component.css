@@ -1,0 +1,34 @@
+table {
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button {
+  margin-left: 1em;
+}
+
+.mat-icon-cell {
+  transform: scale(1.25);
+  overflow: inherit;
+  margin-right: 0;
+}
+
+.mat-column-Actions,
+.mat-column-Size {
+  text-align: right;
+}
+
+.mat-footer-cell {
+  font-style: italic;
+}
+
+.mat-row .mat-cell {
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: #efefef;
+}

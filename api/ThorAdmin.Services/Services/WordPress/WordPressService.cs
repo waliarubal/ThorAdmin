@@ -114,7 +114,7 @@ namespace ThorAdmin.Services
                 var instance = new WordPressInstance
                 {
                     Id = directoryInfo.Name,
-                    Name = directoryInfo.Name,
+                    Name = $"<{directoryInfo.Name}>",
                     Directory = directoryInfo.FullName,
                     Created = directoryInfo.CreationTimeUtc,
                     Modified = directoryInfo.LastWriteTimeUtc,
@@ -129,9 +129,12 @@ namespace ThorAdmin.Services
                     instance.IsConfigured =  await _mySqlService.TableExists("wp_options", DbName, DbServer, DbUser, DbPassword);
                     if (instance.IsConfigured)
                     {
-                        instance.Name = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogname'", DbServer, DbUser, DbPassword, DbName) ?? directoryInfo.Name;
+                        instance.Name = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogname'", DbServer, DbUser, DbPassword, DbName);
                         instance.Description = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'blogdescription'", DbServer, DbUser, DbPassword, DbName);
                         instance.Url = await _mySqlService.ExecuteSaclar<string>("SELECT option_value FROM wp_options WHERE option_name = 'siteurl'", DbServer, DbUser, DbPassword, DbName);
+
+                        if (string.IsNullOrWhiteSpace(instance.Name))
+                            instance.Name = $"<{directoryInfo.Name}>";
                     }  
                 }
 
