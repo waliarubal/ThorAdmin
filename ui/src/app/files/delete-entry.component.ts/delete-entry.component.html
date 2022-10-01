@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Confirm Deletion</h1>
+<div mat-dialog-content>
+  <p>
+    Are you sure you want to delete the
+    {{ Entry.IsDirectory ? "directory" : "file" }} {{ Entry.Name }}?
+  </p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" [disabled]="IsBusy">
+    Cancel
+  </button>
+  <button mat-button (click)="DeleteEntry()" color="warn" [disabled]="IsBusy">
+    Delete
+  </button>
+</div>

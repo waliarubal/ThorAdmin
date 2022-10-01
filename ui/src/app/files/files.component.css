@@ -4,6 +4,8 @@ table {
 
 .spacer {
   flex: 1 1 auto;
+  font-size: small;
+  margin-left: 2em;
 }
 
 button {

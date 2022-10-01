@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BlogsRoutingModule } from './blogs.routing';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,10 +12,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { BlogsComponent } from './blogs.component';
+import { BlogsRoutingModule } from './blogs.routing';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
+import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 
 @NgModule({
-  declarations: [BlogsComponent, CreateBlogComponent],
+  declarations: [BlogsComponent, CreateBlogComponent, DeleteBlogComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -48,4 +48,38 @@ public class FileSystemController : ApiControllerBase<FileSystemController>
         }
 
     }
+
+    [HttpDelete]
+    [Route("[action]")]
+    public IActionResult DeleteEntry([FromBody] FileSystemEntry entry)
+    {
+        try
+        {
+            var result = _fileSystemService.DeleteEntry(entry, Settings);
+            return SendOk(result);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex.Message);
+            return SendError(ex.Message);
+        }
+
+    }
+
+    [HttpPatch]
+    [Route("[action]")]
+    public IActionResult RenameEntry([FromBody] FileSystemEntry entry, [FromQuery] string newName)
+    {
+        try
+        {
+            var result = _fileSystemService.RenameEntry(entry, newName, Settings);
+            return SendOk(result);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex.Message);
+            return SendError(ex.Message);
+        }
+
+    }
 }

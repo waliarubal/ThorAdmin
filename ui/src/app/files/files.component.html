@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
-  <mat-icon fontSet="fab" fontIcon="fa-wordpress"></mat-icon>
+  <mat-icon fontSet="fa" fontIcon="fa-folder-tree"></mat-icon>
   <span style="margin-left: 0.25em">File Manager</span>
-  <span class="spacer"></span>
+  <span class="spacer">
+    {{ Entry?.Path ?? "/" }}
+  </span>
   <button
     mat-icon-button
     [disabled]="IsBusy || !Entry || !Entry.Path"
@@ -20,47 +22,56 @@
 <table mat-table [dataSource]="Entries" matSort>
   <ng-container matColumnDef="Name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-    <td mat-cell *matCellDef="let instance" (click)="GetEntries(instance)">
+    <td mat-cell *matCellDef="let entry" (click)="GetEntries(entry)">
       <mat-icon
         class="mat-icon-cell"
         fontSet="far"
-        [fontIcon]="instance.IsDirectory ? 'fa-folder' : 'fa-file'"
+        [fontIcon]="entry.IsDirectory ? 'fa-folder' : 'fa-file'"
       ></mat-icon>
-      {{ instance.Name }}
+      {{ entry.Name }}
     </td>
   </ng-container>
   <ng-container matColumnDef="Created">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
-    <td mat-cell *matCellDef="let instance">
-      {{ instance.Created | date: "M/d/yyyy h:mm a" }}
+    <td mat-cell *matCellDef="let entry">
+      {{ entry.Created | date: "M/d/yyyy h:mm a" }}
     </td>
   </ng-container>
   <ng-container matColumnDef="Modified">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Modified</th>
-    <td mat-cell *matCellDef="let instance">
-      {{ instance.Modified | date: "M/d/yyyy h:mm a" }}
+    <td mat-cell *matCellDef="let entry">
+      {{ entry.Modified | date: "M/d/yyyy h:mm a" }}
     </td>
   </ng-container>
   <ng-container matColumnDef="Type">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-    <td mat-cell *matCellDef="let instance">
-      {{ instance.IsDirectory ? "Directory" : "File" }}
+    <td mat-cell *matCellDef="let entry">
+      {{ entry.IsDirectory ? "Directory" : "File" }}
     </td>
   </ng-container>
   <ng-container matColumnDef="Size">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Size</th>
-    <td mat-cell *matCellDef="let instance">
-      {{ instance.IsDirectory ? "" : (instance.Size | filesize) }}
+    <td mat-cell *matCellDef="let entry">
+      {{ entry.IsDirectory ? "" : (entry.Size | filesize) }}
     </td>
   </ng-container>
   <ng-container matColumnDef="Actions">
     <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let instance">
-      <button mat-icon-button color="warn" [disabled]="IsBusy">
+    <td mat-cell *matCellDef="let entry">
+      <button mat-icon-button [disabled]="IsBusy" (click)="RenameEntry(entry)">
+        <mat-icon fontSet="fa" fontIcon="fa-pen-to-square"></mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        [disabled]="IsBusy"
+        (click)="DeleteEntry(entry)"
+      >
         <mat-icon fontSet="fa" fontIcon="fa-trash-can"></mat-icon>
       </button>
     </td>
   </ng-container>
+
   <ng-container matColumnDef="Footer">
     <td mat-footer-cell *matFooterCellDef colspan="7">
       {{ Entries.length }} item{{ Entries.length != 1 ? "s" : "" }},

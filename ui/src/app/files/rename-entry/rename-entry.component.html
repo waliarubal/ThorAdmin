@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Rename {{Entry.IsDirectory ? 'Directory' : 'File'}}</h1>
+<div mat-dialog-content>
+  <p>Enter new name for {{Entry.IsDirectory ? 'directory' : 'file'}} {{Entry.Name}}.</p>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>{{Entry.IsDirectory ? 'Directory' : 'File'}} Name</mat-label>
+    <input matInput [(ngModel)]="NewName" cdkFocusInitial [disabled]="IsBusy" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close [disabled]="IsBusy">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    (click)="RenameEntry()"
+    [disabled]="IsBusy || NewName == ''"
+  >
+    Rename
+  </button>
+</div>

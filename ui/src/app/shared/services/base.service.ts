@@ -18,7 +18,11 @@ export abstract class ServiceBase {
     return this._http.put<IApiResponse<TData>>(url, payload);
   }
 
-  protected Delete<TData>(url: string) {
-    return this._http.delete<IApiResponse<TData>>(url);
+  protected Patch<TData>(url: string, payload: any) {
+    return this._http.patch<IApiResponse<TData>>(url, payload);
+  }
+
+  protected Delete<TData>(url: string, payload: any = null) {
+    return this._http.delete<IApiResponse<TData>>(url, { body: payload });
   }
 }

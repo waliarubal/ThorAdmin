@@ -15,6 +15,7 @@
   <button mat-button mat-dialog-close [disabled]="IsBusy">Cancel</button>
   <button
     mat-button
+    color="primary"
     (click)="CreateInstance()"
     [disabled]="IsBusy || InstanceName == ''"
   >

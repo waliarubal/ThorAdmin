@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_GET_ENTRIES, API_GET_PARENT_ENTRY } from '../constants';
+import {
+  API_DELETE_ENTRY,
+  API_GET_ENTRIES,
+  API_GET_PARENT_ENTRY,
+  API_RENAME_ENTRY,
+} from '../constants';
 import { IFileSystemEntry } from '../models/file-system-entry.model';
 import { ServiceBase } from './base.service';
 
@@ -20,5 +25,13 @@ export class FileSystemService extends ServiceBase {
     return this.Get<IFileSystemEntry[]>(
       `${API_GET_ENTRIES}?directory=${directory}`
     );
+  }
+
+  DeleteEntry(entry: IFileSystemEntry) {
+    return this.Delete<boolean>(API_DELETE_ENTRY, entry);
+  }
+
+  RenameEntry(entry: IFileSystemEntry, newName: string) {
+    return this.Patch<boolean>(`${API_RENAME_ENTRY}?newName=${newName}`, entry);
   }
 }

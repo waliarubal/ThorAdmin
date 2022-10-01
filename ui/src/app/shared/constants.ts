@@ -13,3 +13,5 @@ export const API_CREATE_INSTANCE = `${API_BASE}/WordPress/CreateInstance`;
 export const API_DELETE_INSTANCE = `${API_BASE}/WordPress/DeleteInstance`;
 export const API_GET_ENTRIES = `${API_BASE}/FileSystem/GetEntries`;
 export const API_GET_PARENT_ENTRY = `${API_BASE}/FileSystem/GetParentEntry`;
+export const API_DELETE_ENTRY = `${API_BASE}/FileSystem/DeleteEntry`;
+export const API_RENAME_ENTRY = `${API_BASE}/FileSystem/RenameEntry`;

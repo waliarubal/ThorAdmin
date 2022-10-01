@@ -4,6 +4,7 @@ import { IWordPressInstance } from '../shared/models/word-press-instance.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { ComponentBase } from '../shared/base.component';
+import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 
 @Component({
   selector: 'app-blogs',
@@ -54,13 +55,11 @@ export class BlogsComponent extends ComponentBase implements AfterViewInit {
   }
 
   DeleteInstance(instance: IWordPressInstance) {
-    this.IsBusy = true;
-    let subscription = this._wpService
-      .DeleteInstance(instance.Id)
-      .subscribe((result) => {
-        subscription.unsubscribe();
-        if (result.Data == true) this.GetInstances();
-        else this.IsBusy = false;
-      });
+    let dialogRef = this._dialogService.open(DeleteBlogComponent, {
+      data: instance,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == true) this.GetInstances();
+    });
   }
 }

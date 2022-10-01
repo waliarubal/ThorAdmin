@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ComponentBase } from '../shared/base.component';
 import { IFileSystemEntry } from '../shared/models/file-system-entry.model';
 import { FileSystemService } from '../shared/services/file-system.service';
+import { DeleteEntryComponent } from './delete-entry.component.ts/delete-entry.component';
+import { RenameEntryComponent } from './rename-entry/rename-entry.component';
 
 @Component({
   selector: 'app-files',
@@ -74,6 +76,24 @@ export class FilesComponent extends ComponentBase {
       this._entries = result.Data;
       subscription.unsubscribe();
       this.IsBusy = false;
+    });
+  }
+
+  DeleteEntry(entry: IFileSystemEntry) {
+    let dialogRef = this._dialogService.open(DeleteEntryComponent, {
+      data: entry,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == true) this.GetEntries(this.Entry);
+    });
+  }
+
+  RenameEntry(entry: IFileSystemEntry) {
+    let dialogRef = this._dialogService.open(RenameEntryComponent, {
+      data: entry,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == true) this.GetEntries(this.Entry);
     });
   }
 }
