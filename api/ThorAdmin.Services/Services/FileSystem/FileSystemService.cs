@@ -1,4 +1,5 @@
-﻿using ThorAdmin.Services.Models;
+﻿using System.ComponentModel;
+using ThorAdmin.Services.Models;
 
 namespace ThorAdmin.Services;
 
@@ -75,5 +76,18 @@ public class FileSystemService : IFileSystemService
         }
 
         return entries;
+    }
+
+    public async Task<byte[]> GetContents(FileSystemEntry entry, Settings settings)
+    {
+        if (entry.IsDirectory)
+            throw new InvalidOperationException("Can not download directories.");
+
+        var path = Path.Join(settings.RootDirectory, entry.Path);
+        if (!File.Exists(path))
+            throw new FileNotFoundException($"File {entry.Path} does not exist.");
+
+        var bytes = await File.ReadAllBytesAsync(path);
+        return bytes;
     }
 }

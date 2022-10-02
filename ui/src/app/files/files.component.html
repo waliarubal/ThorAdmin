@@ -58,6 +58,14 @@
   <ng-container matColumnDef="Actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let entry">
+      <button
+        mat-icon-button
+        [disabled]="IsBusy"
+        (click)="DownloadFile(entry)"
+        *ngIf="!entry?.IsDirectory"
+      >
+        <mat-icon fontSet="fa" fontIcon="fa-download"></mat-icon>
+      </button>
       <button mat-icon-button [disabled]="IsBusy" (click)="RenameEntry(entry)">
         <mat-icon fontSet="fa" fontIcon="fa-pen-to-square"></mat-icon>
       </button>

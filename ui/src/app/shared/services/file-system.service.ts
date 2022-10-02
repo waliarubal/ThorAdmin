@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   API_DELETE_ENTRY,
+  API_DOWNLOAD_ENTRY,
   API_GET_ENTRIES,
   API_GET_PARENT_ENTRY,
   API_RENAME_ENTRY,
@@ -33,5 +34,11 @@ export class FileSystemService extends ServiceBase {
 
   RenameEntry(entry: IFileSystemEntry, newName: string) {
     return this.Patch<boolean>(`${API_RENAME_ENTRY}?newName=${newName}`, entry);
+  }
+
+  DownloadEntry(entry: IFileSystemEntry) {
+    return this.Http.post(API_DOWNLOAD_ENTRY, entry, {
+      responseType: 'arraybuffer',
+    });
   }
 }

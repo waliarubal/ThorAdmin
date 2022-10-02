@@ -6,6 +6,10 @@ import { IApiResponse } from '../models/api-response.model';
 export abstract class ServiceBase {
   constructor(private _http: HttpClient) {}
 
+  get Http() {
+    return this._http;
+  }
+
   protected Get<TData>(url: string) {
     return this._http.get<IApiResponse<TData>>(url);
   }

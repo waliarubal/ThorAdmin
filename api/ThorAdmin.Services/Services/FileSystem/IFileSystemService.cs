@@ -11,4 +11,6 @@ public interface IFileSystemService
     bool DeleteEntry(FileSystemEntry entry, Settings settings);
 
     bool RenameEntry(FileSystemEntry entry, string newName, Settings settings);
+
+    Task<byte[]> GetContents(FileSystemEntry entry, Settings settings);
 }

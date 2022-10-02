@@ -6,14 +6,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
+		<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="wwwroot\.gitkeep" />
+		<Content Remove="wwwroot\.gitkeep" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="wwwroot\.gitkeep" />
+		<None Include="wwwroot\.gitkeep" />
 	</ItemGroup>
 
 	<ItemGroup>

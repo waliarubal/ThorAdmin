@@ -15,3 +15,4 @@ export const API_GET_ENTRIES = `${API_BASE}/FileSystem/GetEntries`;
 export const API_GET_PARENT_ENTRY = `${API_BASE}/FileSystem/GetParentEntry`;
 export const API_DELETE_ENTRY = `${API_BASE}/FileSystem/DeleteEntry`;
 export const API_RENAME_ENTRY = `${API_BASE}/FileSystem/RenameEntry`;
+export const API_DOWNLOAD_ENTRY = `${API_BASE}/FileSystem/DownloadEntry`;

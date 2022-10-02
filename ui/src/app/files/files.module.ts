@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FilesComponent } from './files.component';
 import { FilesRoutingModule } from './files.routing';
 import { FileSizePipe } from '../shared/pipes/file-size.pipe';
-import { DeleteEntryComponent } from './delete-entry.component.ts/delete-entry.component';
+import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
 import { RenameEntryComponent } from './rename-entry/rename-entry.component';
 
 @NgModule({

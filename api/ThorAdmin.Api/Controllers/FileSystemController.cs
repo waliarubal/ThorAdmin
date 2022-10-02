@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 using ThorAdmin.Api.Base;
 using ThorAdmin.Services;
@@ -81,5 +82,21 @@ public class FileSystemController : ApiControllerBase<FileSystemController>
             return SendError(ex.Message);
         }
 
+    }
+
+    [HttpPost]
+    [Route("[action]")]
+    public async Task<IActionResult> DownloadEntry([FromBody] FileSystemEntry entry)
+    {
+        try
+        {
+            var bytes = await _fileSystemService.GetContents(entry, Settings);
+            return File(bytes, "application/octet-stream", entry.Name);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex.Message);
+            return SendError(ex.Message);
+        }
     }
 }
