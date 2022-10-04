@@ -1,0 +1,46 @@
+<mat-card class="container">
+  <mat-card-title>ThorAdmin</mat-card-title>
+  <mat-card-subtitle>Please enter your user name and pasword to authenticate.</mat-card-subtitle>
+  <mat-form-field appearance="fill">
+    <mat-label>User Name</mat-label>
+    <input
+      matInput
+      placeholder="Enter your user name"
+      [(ngModel)]="UserName"
+      required
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input
+      [type]="IsPasswordVisible ? 'text' : 'password'"
+      matInput
+      placeholder="Enter your password"
+      [(ngModel)]="Password"
+      required
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="IsPasswordVisible = !IsPasswordVisible"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="IsPasswordVisible"
+    >
+      <mat-icon>{{
+        IsPasswordVisible ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions align="end">
+    <button mat-button>Forgot your password?</button>
+    <button
+      (click)="LogIn()"
+      mat-button
+      color="primary"
+      [disabled]="UserName == '' || Password == ''"
+    >
+      Sign In
+    </button>
+  </mat-card-actions>
+</mat-card>

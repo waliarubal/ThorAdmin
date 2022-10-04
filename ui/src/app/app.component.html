@@ -1,5 +1,5 @@
 <mat-sidenav-container class="root-container">
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav mode="side" opened *ngIf="IsAuthenticated">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
