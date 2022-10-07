@@ -86,6 +86,23 @@ public class FileSystemController : ApiControllerBase<FileSystemController>
 
     [HttpPost]
     [Route("[action]")]
+    public async Task<IActionResult> CreateEntry([FromBody] FileSystemEntry entry)
+    {
+        try
+        {
+            var result = await _fileSystemService.CreateEntry(entry, Settings);
+            return SendOk(result);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex.Message);
+            return SendError(ex.Message);
+        }
+
+    }
+
+    [HttpPost]
+    [Route("[action]")]
     public async Task<IActionResult> DownloadEntry([FromBody] FileSystemEntry entry)
     {
         try

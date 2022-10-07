@@ -1,3 +1,7 @@
 a span {
-  margin-left: .25em;
+  margin-left: 1em;
+}
+
+.mat-icon {
+  border-radius: 0% !important;
 }

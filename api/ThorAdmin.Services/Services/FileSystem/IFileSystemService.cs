@@ -12,5 +12,7 @@ public interface IFileSystemService
 
     bool RenameEntry(FileSystemEntry entry, string newName, Settings settings);
 
+    Task<bool> CreateEntry(FileSystemEntry entry, Settings settings);
+
     Task<byte[]> GetContents(FileSystemEntry entry, Settings settings);
 }

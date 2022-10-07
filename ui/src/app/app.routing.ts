@@ -4,7 +4,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users/sign-in', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: '/users/sign-in',
+    pathMatch: 'full',
+  },
   {
     path: 'blogs',
     loadChildren: () =>

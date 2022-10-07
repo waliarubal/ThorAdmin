@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Create</h1>
+<div mat-dialog-content>
+  <p>
+    Enter new name for the {{ Entry.IsDirectory ? "directory" : "file" }} you
+    want to be created in directory {{ Entry.Path }}.
+  </p>
+  <mat-radio-group
+    style="display: block; margin-bottom: 1em"
+    aria-label="Select an option"
+    [(ngModel)]="Entry.IsDirectory"
+  >
+    <mat-radio-button [value]="false" style="margin-right: 1em"
+      >File</mat-radio-button
+    >
+    <mat-radio-button [value]="true">Directory</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field appearance="fill" style="display: block">
+    <mat-label>{{ Entry.IsDirectory ? "Directory" : "File" }} Name</mat-label>
+    <input
+      matInput
+      [(ngModel)]="Entry.Name"
+      cdkFocusInitial
+      [disabled]="IsBusy"
+    />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close [disabled]="IsBusy">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    (click)="CreateEntry()"
+    [disabled]="IsBusy || Entry.Name == ''"
+  >
+    Create
+  </button>
+</div>

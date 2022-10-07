@@ -1,6 +1,8 @@
 <mat-card class="container">
   <mat-card-title>ThorAdmin</mat-card-title>
-  <mat-card-subtitle>Please enter your user name and pasword to authenticate.</mat-card-subtitle>
+  <mat-card-subtitle
+    >Please enter your user name and pasword to authenticate.</mat-card-subtitle
+  >
   <mat-form-field appearance="fill">
     <mat-label>User Name</mat-label>
     <input
@@ -8,6 +10,7 @@
       placeholder="Enter your user name"
       [(ngModel)]="UserName"
       required
+      cdkFocusInitial
     />
   </mat-form-field>
   <mat-form-field appearance="fill">
@@ -34,13 +37,6 @@
   <mat-divider inset></mat-divider>
   <mat-card-actions align="end">
     <button mat-button>Forgot your password?</button>
-    <button
-      (click)="LogIn()"
-      mat-button
-      color="primary"
-      [disabled]="UserName == '' || Password == ''"
-    >
-      Sign In
-    </button>
+    <button (click)="LogIn()" mat-raised-button color="primary">Log In</button>
   </mat-card-actions>
 </mat-card>

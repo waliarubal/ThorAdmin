@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBase: 'http://137.117.66.239:83/api/v1'
+  apiBase: 'http://brickred.eastus.cloudapp.azure.com:83/api/v1'
 };

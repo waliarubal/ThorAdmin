@@ -22,7 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

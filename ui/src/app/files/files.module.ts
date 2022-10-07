@@ -9,12 +9,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { FilesComponent } from './files.component';
 import { FilesRoutingModule } from './files.routing';
 import { FileSizePipe } from '../shared/pipes/file-size.pipe';
 import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
 import { RenameEntryComponent } from './rename-entry/rename-entry.component';
+import { CreateEntryComponent } from './create-entry/create-entry.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RenameEntryComponent } from './rename-entry/rename-entry.component';
     FileSizePipe,
     DeleteEntryComponent,
     RenameEntryComponent,
+    CreateEntryComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { RenameEntryComponent } from './rename-entry/rename-entry.component';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
+    MatRadioModule,
   ],
   providers: [],
 })

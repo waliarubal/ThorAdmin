@@ -10,7 +10,7 @@ public class FileSystemService : IFileSystemService
         var path = Path.Join(settings.RootDirectory, entry.Path);
         if (entry.IsDirectory && Directory.Exists(path))
             Directory.Delete(path, true);
-        else 
+        else
             File.Delete(path);
 
         return true;
@@ -24,6 +24,22 @@ public class FileSystemService : IFileSystemService
             Directory.Move(path, newPath);
         else
             File.Move(path, newPath);
+
+        return true;
+    }
+
+    public async Task<bool> CreateEntry(FileSystemEntry entry, Settings settings)
+    {
+        var path = Path.Join(settings.RootDirectory, entry.Path, entry.Name);
+        if (entry.IsDirectory)
+        {
+            if (Directory.Exists(path))
+                throw new Exception($"Directory {entry.Name} already exists.");
+
+            Directory.CreateDirectory(path);
+        }
+        else
+            await File.Create(path).DisposeAsync();
 
         return true;
     }
