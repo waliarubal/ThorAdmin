@@ -19,6 +19,7 @@ services.AddCors(options =>
 services.AddScoped<IMySqlService, MySqlService>();
 services.AddScoped<IWordPressService, WordPressService>();
 services.AddScoped<IFileSystemService, FileSystemService>();
+services.AddScoped<IMachineInfoService, MachineInfoService>();
 
 services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);

@@ -1,4 +1,5 @@
-﻿using ThorAdmin.Services.Models;
+﻿using Microsoft.AspNetCore.Http;
+using ThorAdmin.Services.Models;
 
 namespace ThorAdmin.Services;
 
@@ -15,4 +16,6 @@ public interface IFileSystemService
     Task<bool> CreateEntry(FileSystemEntry entry, Settings settings);
 
     Task<byte[]> GetContents(FileSystemEntry entry, Settings settings);
+
+    Task<bool> WriteContents(FileSystemEntry entry, IFormFile file, Settings settings);
 }

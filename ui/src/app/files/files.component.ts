@@ -8,6 +8,7 @@ import { FileSystemService } from '../shared/services/file-system.service';
 import { CreateEntryComponent } from './create-entry/create-entry.component';
 import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
 import { RenameEntryComponent } from './rename-entry/rename-entry.component';
+import { UploadEntryComponent } from './upload-entry/upload-entry.component';
 
 @Component({
   selector: 'app-files',
@@ -109,7 +110,7 @@ export class FilesComponent extends ComponentBase {
         Name: '',
         Path: this.Entry ? this.Entry.Path : PATH_SEPARATOR,
       },
-      width: '24em',
+      minWidth: '24em',
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) this.GetEntries(this.Entry);
@@ -120,6 +121,20 @@ export class FilesComponent extends ComponentBase {
     this._fsService.DownloadEntry(entry).subscribe((result) => {
       let blob = new Blob([<any>result]);
       saveAs(blob, entry.Name);
+    });
+  }
+
+  UploadEntry() {
+    let dialogRef = this._dialogService.open(UploadEntryComponent, {
+      data: <IFileSystemEntry>{
+        IsDirectory: false,
+        Name: '',
+        Path: this.Entry ? this.Entry.Path : PATH_SEPARATOR,
+      },
+      minWidth: '24em',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == true) this.GetEntries(this.Entry);
     });
   }
 }

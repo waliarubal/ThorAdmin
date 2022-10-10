@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Http;
 using ThorAdmin.Services.Models;
 
 namespace ThorAdmin.Services;
@@ -105,5 +105,20 @@ public class FileSystemService : IFileSystemService
 
         var bytes = await File.ReadAllBytesAsync(path);
         return bytes;
+    }
+
+    public async Task<bool> WriteContents(FileSystemEntry entry, IFormFile file, Settings settings)
+    {
+        if (entry.IsDirectory)
+            throw new InvalidOperationException("Can not write directories.");
+
+        var path = Path.Join(settings.RootDirectory, entry.Path, entry.Name);
+        if (File.Exists(path))
+            File.Delete(path);
+
+        using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.Write);
+        await file.CopyToAsync(stream);
+
+        return true;
     }
 }

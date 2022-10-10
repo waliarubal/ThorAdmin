@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Upload File</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" style="display: block">
+    <mat-label *ngIf="!IsBusy">File</mat-label>
+    <mat-label *ngIf="IsBusy">Uploading {{ Progress }}%...</mat-label>
+    <input
+      type="file"
+      #file
+      style="display: none"
+      (change)="FileSelected(file.files)"
+    />
+    <input matInput disabled [(ngModel)]="Entry.Name" />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="file.click()"
+      [disabled]="IsBusy"
+    >
+      <mat-icon fontSet="fas" fontIcon="fa-folder-open"></mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close [disabled]="IsBusy">Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    (click)="UploadEntry()"
+    [disabled]="IsBusy || !Entry.Name"
+  >
+    Upload
+  </button>
+</div>

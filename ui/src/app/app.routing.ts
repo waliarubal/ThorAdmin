@@ -10,6 +10,12 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'monitor',
+    loadChildren: () =>
+      import('./monitor/monitor.module').then((m) => m.MonitorModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'blogs',
     loadChildren: () =>
       import('./blogs/blogs.module').then((m) => m.BlogsModule),

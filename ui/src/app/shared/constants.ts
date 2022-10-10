@@ -19,3 +19,4 @@ export const API_DELETE_ENTRY = `${API_BASE}/FileSystem/DeleteEntry`;
 export const API_RENAME_ENTRY = `${API_BASE}/FileSystem/RenameEntry`;
 export const API_CREATE_ENTRY = `${API_BASE}/FileSystem/CreateEntry`;
 export const API_DOWNLOAD_ENTRY = `${API_BASE}/FileSystem/DownloadEntry`;
+export const API_UPLOAD_ENTRY = `${API_BASE}/FileSystem/UploadEntry`;

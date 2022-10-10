@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
+using System.Text.Json;
 using ThorAdmin.Api.Base;
 using ThorAdmin.Services;
 using ThorAdmin.Services.Models;
@@ -116,4 +116,26 @@ public class FileSystemController : ApiControllerBase<FileSystemController>
             return SendError(ex.Message);
         }
     }
+
+    [HttpPost]
+    [Route("[action]")]
+    [DisableRequestSizeLimit]
+    [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue, MemoryBufferThreshold = int.MaxValue)]
+    public async Task<IActionResult> UploadEntry()
+    {
+        try
+        {
+            var entry = JsonSerializer.Deserialize<FileSystemEntry>(Request.Form["entry"]);
+            var file = Request.Form.Files[0];
+            var result = await _fileSystemService.WriteContents(entry, file, Settings);
+
+            return SendOk(result);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex.Message);
+            return SendError(ex.Message);
+        }
+    }
+    
 }

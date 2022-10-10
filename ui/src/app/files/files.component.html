@@ -14,6 +14,9 @@
   <button mat-icon-button [disabled]="IsBusy" (click)="CreateEntry()">
     <mat-icon fontSet="fa" fontIcon="fa-plus"></mat-icon>
   </button>
+  <button mat-icon-button [disabled]="IsBusy" (click)="UploadEntry()">
+    <mat-icon fontSet="fa" fontIcon="fa-upload"></mat-icon>
+  </button>
   <button mat-icon-button [disabled]="IsBusy" (click)="GetEntries(Entry)">
     <mat-icon fontSet="fa" fontIcon="fa-arrow-rotate-right"></mat-icon>
   </button>
@@ -82,7 +85,7 @@
 
   <ng-container matColumnDef="Footer">
     <td mat-footer-cell *matFooterCellDef colspan="7">
-      {{ Entries.length }} item{{ Entries.length != 1 ? "s" : "" }} |
+      {{ Entries.length }} item{{ Entries.length != 1 ? "s" : "" }} -
       {{ DirectoryCount }}
       {{ DirectoryCount == 1 ? "directory" : "directories" }} and
       {{ FileCount }} file{{ FileCount != 1 ? "s" : "" }}.

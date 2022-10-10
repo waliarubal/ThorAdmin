@@ -17,6 +17,7 @@ import { FileSizePipe } from '../shared/pipes/file-size.pipe';
 import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
 import { RenameEntryComponent } from './rename-entry/rename-entry.component';
 import { CreateEntryComponent } from './create-entry/create-entry.component';
+import { UploadEntryComponent } from './upload-entry/upload-entry.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CreateEntryComponent } from './create-entry/create-entry.component';
     DeleteEntryComponent,
     RenameEntryComponent,
     CreateEntryComponent,
+    UploadEntryComponent
   ],
   imports: [
     CommonModule,
