@@ -5,4 +5,6 @@ namespace ThorAdmin.Services;
 public interface IMachineInfoService
 {
     IEnumerable<ProcessInfo> GetProcesses();
+
+    bool KillProcess(int id);
 }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~bootstrap/dist/css/bootstrap-grid.min.css";
 
 html,
 body {
@@ -8,4 +9,18 @@ body {
 
 body {
   margin: 0;
+}
+
+.container-fluid {
+  padding: 0 !important;
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.col,
+.col-6 {
+  padding-left: 0 !important;
 }

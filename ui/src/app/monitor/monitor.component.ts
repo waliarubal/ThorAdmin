@@ -5,5 +5,5 @@ import { Component } from "@angular/core";
     templateUrl: './monitor.component.html'
 })
 export class MonitorComponent {
-
+    ProcessCount: number = 0;
 }

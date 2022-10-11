@@ -13,7 +13,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    SidebarComponent,
+    NotFoundComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

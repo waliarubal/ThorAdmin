@@ -13,20 +13,19 @@ import { MatRadioModule } from '@angular/material/radio';
 
 import { FilesComponent } from './files.component';
 import { FilesRoutingModule } from './files.routing';
-import { FileSizePipe } from '../shared/pipes/file-size.pipe';
 import { DeleteEntryComponent } from './delete-entry/delete-entry.component';
 import { RenameEntryComponent } from './rename-entry/rename-entry.component';
 import { CreateEntryComponent } from './create-entry/create-entry.component';
 import { UploadEntryComponent } from './upload-entry/upload-entry.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     FilesComponent,
-    FileSizePipe,
     DeleteEntryComponent,
     RenameEntryComponent,
     CreateEntryComponent,
-    UploadEntryComponent
+    UploadEntryComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +40,7 @@ import { UploadEntryComponent } from './upload-entry/upload-entry.component';
     MatInputModule,
     MatFormFieldModule,
     MatRadioModule,
+    SharedModule,
   ],
   providers: [],
 })

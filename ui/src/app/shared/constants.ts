@@ -20,3 +20,5 @@ export const API_RENAME_ENTRY = `${API_BASE}/FileSystem/RenameEntry`;
 export const API_CREATE_ENTRY = `${API_BASE}/FileSystem/CreateEntry`;
 export const API_DOWNLOAD_ENTRY = `${API_BASE}/FileSystem/DownloadEntry`;
 export const API_UPLOAD_ENTRY = `${API_BASE}/FileSystem/UploadEntry`;
+export const API_GET_PROCESSES = `${API_BASE}/MachineInfo/GetProcesses`;
+export const API_KILL_PROCESSES = `${API_BASE}/MachineInfo/KillProcess`;

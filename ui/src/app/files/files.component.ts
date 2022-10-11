@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { ComponentBase } from '../shared/base.component';
@@ -16,7 +16,7 @@ import { UploadEntryComponent } from './upload-entry/upload-entry.component';
   styleUrls: ['./files.component.css'],
   providers: [FileSystemService],
 })
-export class FilesComponent extends ComponentBase {
+export class FilesComponent extends ComponentBase implements AfterViewInit {
   readonly PATH_SEPARATOR = PATH_SEPARATOR;
 
   private _entries: IFileSystemEntry[];

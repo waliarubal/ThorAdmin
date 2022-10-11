@@ -29,6 +29,22 @@ public class MachineInfoController : ApiControllerBase<MachineInfoController>
             Logger.LogError(ex.Message);
             return SendError(ex.Message);
         }
+    }
+
+    [HttpDelete]
+    [Route("[action]/{id}")]
+    public IActionResult KillProcess(int id)
+    {
+        try
+        {
+            var result = _machineInfoService.KillProcess(id);
+            return SendOk(result);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex.Message);
+            return SendError(ex.Message);
+        }
 
     }
 }

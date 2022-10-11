@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+
+.mat-column-Actions,
+.mat-column-Memory {
+  text-align: right;
+}
+
+.table-container {
+  height: 28em;
+  max-width: 100%;
+  overflow: auto;
+}

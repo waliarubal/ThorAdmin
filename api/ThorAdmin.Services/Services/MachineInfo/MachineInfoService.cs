@@ -20,4 +20,11 @@ public class MachineInfoService: IMachineInfoService
         }
         return procInfos;
     }
+
+    public bool KillProcess(int id)
+    {
+        var process = Process.GetProcessById(id);
+        process.Kill(true);
+        return true;
+    }
 }
