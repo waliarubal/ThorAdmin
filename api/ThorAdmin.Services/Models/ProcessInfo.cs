@@ -7,4 +7,6 @@ public class ProcessInfo
     public string Name { get; set; }
 
     public long Memory { get; set; }
+
+    public double Cpu { get; set; }
 }

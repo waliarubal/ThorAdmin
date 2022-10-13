@@ -2,6 +2,7 @@ table {
   width: 100%;
 }
 
+.mat-column-Cpu,
 .mat-column-Actions,
 .mat-column-Memory {
   text-align: right;

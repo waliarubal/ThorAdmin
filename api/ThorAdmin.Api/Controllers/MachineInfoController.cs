@@ -17,11 +17,11 @@ public class MachineInfoController : ApiControllerBase<MachineInfoController>
 
     [HttpGet]
     [Route("[action]")]
-    public IActionResult GetProcesses()
+    public async Task<IActionResult> GetProcesses()
     {
         try
         {
-            var result = _machineInfoService.GetProcesses();
+            var result = await _machineInfoService.GetProcesses();
             return SendOk(result);
         }
         catch (Exception ex)
