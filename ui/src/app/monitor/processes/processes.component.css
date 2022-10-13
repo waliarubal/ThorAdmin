@@ -2,10 +2,15 @@ table {
   width: 100%;
 }
 
+.mat-column-Id {
+  padding-right: 1em;
+}
+
 .mat-column-Cpu,
 .mat-column-Actions,
 .mat-column-Memory {
   text-align: right;
+  padding-right: 1em;
 }
 
 .table-container {

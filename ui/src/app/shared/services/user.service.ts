@@ -18,7 +18,7 @@ export class UserService extends ServiceBase {
 
   async LogIn(userName: string, password: string) {
     sessionStorage.setItem('IsAuthenticated', Bool.Yes);
-    await this._router.navigateByUrl('/blogs');
+    await this._router.navigateByUrl('/monitor');
   }
 
   async LogOff() {

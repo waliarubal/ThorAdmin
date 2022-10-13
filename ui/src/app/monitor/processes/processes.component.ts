@@ -18,7 +18,7 @@ export class ProcessesComponent extends ComponentBase implements AfterViewInit {
   constructor(private _machineInfoService: MachineInfoService) {
     super();
     this._processes = [];
-    this._columns = ['Id', 'Name', 'Memory', 'Cpu', 'Actions'];
+    this._columns = ['Id', 'Name', 'Cpu', 'Memory', 'Actions'];
     this.OnGetProcesses = new EventEmitter();
     this.IsBusy = true;
   }

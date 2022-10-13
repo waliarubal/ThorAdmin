@@ -12,9 +12,16 @@ public class MachineInfoService : IMachineInfoService
         var procInfos = new List<ProcessInfo>();
         foreach (var proc in Process.GetProcesses())
         {
-            var cpuUsageTotal = 0D;
             try
             {
+                var name = proc.MainModule.FileVersionInfo.FileDescription;
+                if (string.IsNullOrEmpty(name))
+                    name = proc.ProcessName;
+
+                // skip processes with no name
+                if (string.IsNullOrEmpty(name))
+                    continue;
+
                 var startTime = DateTime.UtcNow;
                 var startCpuUsage = proc.TotalProcessorTime;
 
@@ -26,21 +33,21 @@ public class MachineInfoService : IMachineInfoService
 
                 var usedCpuMs = (endCpuUSage - startCpuUsage).TotalMilliseconds;
                 var totaPassedMs = (endTime - startTime).TotalMilliseconds;
-                cpuUsageTotal = usedCpuMs / (processorCount * totaPassedMs);
+                var cpuUsageTotal = usedCpuMs / (processorCount * totaPassedMs);
+
+                var procInfo = new ProcessInfo
+                {
+                    Id = proc.Id,
+                    Name = name,
+                    Memory = proc.WorkingSet64,
+                    Cpu = cpuUsageTotal * 100
+                };
+                procInfos.Add(procInfo);
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine(ex);
             }
-
-            var procInfo = new ProcessInfo
-            {
-                Id = proc.Id,
-                Name = proc.ProcessName,
-                Memory = proc.WorkingSet64,
-                Cpu = cpuUsageTotal * 100
-            };
-            procInfos.Add(procInfo);
         }
         return procInfos;
     }
