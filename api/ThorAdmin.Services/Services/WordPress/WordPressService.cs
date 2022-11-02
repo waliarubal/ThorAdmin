@@ -156,5 +156,10 @@ namespace ThorAdmin.Services
 
             return instances;
         }
+
+        void GetUsers(string id, Settings settings)
+        {
+
+        }
     }
 }

@@ -15,9 +15,15 @@ import { BlogsComponent } from './blogs.component';
 import { BlogsRoutingModule } from './blogs.routing';
 import { CreateBlogComponent } from './create-blog/create-blog.component';
 import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [BlogsComponent, CreateBlogComponent, DeleteBlogComponent],
+  declarations: [
+    BlogsComponent,
+    CreateBlogComponent,
+    DeleteBlogComponent,
+    UsersComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -30,8 +36,8 @@ import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
     MatTooltipModule,
     MatDialogModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ],
   providers: [],
 })
-export class BlogsModule {}
+export class BlogsModule { }

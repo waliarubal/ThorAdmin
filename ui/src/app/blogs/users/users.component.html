@@ -1,0 +1,13 @@
+<mat-toolbar>
+  <mat-icon fontSet="fas" fontIcon="fa-users-gear"></mat-icon>
+  <span style="margin-left: 0.25em">WordPress Blog Users</span>
+  <span class="spacer">
+    {{ Instance.Name }}
+  </span>
+  <button mat-icon-button [disabled]="IsBusy">
+    <mat-icon fontSet="fa" fontIcon="fa-plus"></mat-icon>
+  </button>
+  <button mat-icon-button [disabled]="IsBusy" (click)="GetUsers()">
+    <mat-icon fontSet="fa" fontIcon="fa-arrow-rotate-right"></mat-icon>
+  </button>
+</mat-toolbar>

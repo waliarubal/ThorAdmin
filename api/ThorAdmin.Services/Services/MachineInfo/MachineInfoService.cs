@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using ThorAdmin.Services.Models;
 
 namespace ThorAdmin.Services;
@@ -44,7 +45,7 @@ public class MachineInfoService : IMachineInfoService
                 };
                 procInfos.Add(procInfo);
             }
-            catch (Exception ex)
+            catch (Win32Exception ex)
             {
                 Console.Error.WriteLine(ex);
             }
