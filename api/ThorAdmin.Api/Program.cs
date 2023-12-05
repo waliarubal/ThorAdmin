@@ -33,6 +33,17 @@ services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "Thor API",
         Description = "Thor is an administration API for managing your web server.",
+        License = new OpenApiLicense
+        {
+            Name = "MIT",
+            Url = new Uri("https://opensource.org/license/mit/")
+        },
+        Contact = new OpenApiContact
+        {
+            Name = "Rubal Walia",
+            Email = "walia.rubal@gmail.com",
+            Url = new Uri("https://github.com/waliarubal/")
+        }
     });
 });
 
