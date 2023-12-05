@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "thor-admin:build:production"
+              "buildTarget": "thor-admin:build:production"
             },
             "development": {
-              "browserTarget": "thor-admin:build:development"
+              "buildTarget": "thor-admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "thor-admin:build"
+            "buildTarget": "thor-admin:build"
           }
         },
         "test": {
