@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBase: 'http://localhost:5203/api/v1'
+  apiBase: 'http://brickred.eastus.cloudapp.azure.com:83/api/v1' //'http://localhost:5203/api/v1'
 };
 
 /*

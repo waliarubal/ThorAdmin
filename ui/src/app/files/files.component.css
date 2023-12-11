@@ -23,14 +23,14 @@ button {
   text-align: right;
 }
 
-.mat-footer-cell {
+.mat-mdc-footer-cell {
   font-style: italic;
 }
 
-.mat-row .mat-cell {
+.mat-mdc-row .mat-mdc-cell {
   cursor: pointer;
 }
 
-.mat-row:hover .mat-cell {
+.mat-mdc-row:hover .mat-mdc-cell {
   background-color: #efefef;
 }
